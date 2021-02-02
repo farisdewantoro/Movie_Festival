@@ -1,7 +1,7 @@
 package movie.festival.repository;
 
 import movie.festival.model.User;
-import movie.festival.payload.EmailAndUsernameResponse;
+import movie.festival.payload.response.EmailAndUsernameResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

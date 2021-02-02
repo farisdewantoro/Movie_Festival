@@ -1,7 +1,6 @@
 package movie.festival.model;
 
 import movie.festival.model.audit.DateAudit;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -22,11 +21,11 @@ import java.util.UUID;
 })
 public class User extends DateAudit {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
+//    @GeneratedValue(generator = "UUID")
+//    @GenericGenerator(
+//            name = "UUID",
+//            strategy = "org.hibernate.id.UUIDGenerator"
+//    )
     @Column(name ="id", updatable = false, nullable = false,length = 16)
     private UUID id;
 

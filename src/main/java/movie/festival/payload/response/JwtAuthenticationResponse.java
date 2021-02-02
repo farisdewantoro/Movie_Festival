@@ -1,4 +1,4 @@
-package movie.festival.payload;
+package movie.festival.payload.response;
 
 public class JwtAuthenticationResponse {
     private String accessToken;

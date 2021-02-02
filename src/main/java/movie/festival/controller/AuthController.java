@@ -2,7 +2,7 @@ package movie.festival.controller;
 
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
-import movie.festival.payload.SignUpRequest;
+import movie.festival.payload.request.SignUpRequest;
 import movie.festival.service.UserCommandService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

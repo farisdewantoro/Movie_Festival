@@ -1,4 +1,4 @@
-package movie.festival.payload;
+package movie.festival.payload.request;
 
 import javax.validation.constraints.NotBlank;
 

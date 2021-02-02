@@ -1,15 +1,16 @@
 package movie.festival.controller;
 
 import io.swagger.annotations.Api;
+import lombok.AllArgsConstructor;
+import movie.festival.command.DeleteUserCommand;
 import movie.festival.model.User;
-import movie.festival.payload.EmailAndUsernameResponse;
+import movie.festival.payload.request.ChangePasswordRequest;
+import movie.festival.payload.response.EmailAndUsernameResponse;
 import movie.festival.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import movie.festival.service.UserCommandService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -18,9 +19,11 @@ import java.util.UUID;
 @RestController
 @Api
 @RequestMapping("/api/user")
+@AllArgsConstructor
 public class UserController {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    private final UserCommandService userCommandService;
 
     @GetMapping
     public List<User> getAllUser(){
@@ -32,6 +35,16 @@ public class UserController {
         return userRepository.findById(id).orElseThrow(()->new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "user is not found"
         ));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> delete(DeleteUserCommand deleteUserCommand){
+        return userCommandService.deleteUser(deleteUserCommand);
+    }
+
+    @PutMapping("/api/user/password")
+    public ResponseEntity<?> changePassword(ChangePasswordRequest changePasswordRequest){
+        return userCommandService.changePassword(changePasswordRequest);
     }
 
     @GetMapping("/email")
