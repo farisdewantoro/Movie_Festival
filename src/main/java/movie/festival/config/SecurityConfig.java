@@ -64,14 +64,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .and()
                 .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                    .and()
-                .authorizeRequests()
-                    .antMatchers("/api/user/**")
-                        .permitAll()
-                    .antMatchers("/api/auth/**")
-                        .permitAll()
-                .anyRequest()
-                    .authenticated();
+                    .and();
+//                .authorizeRequests()
+//                    .antMatchers("**")
+//                        .permitAll()
+//                    .antMatchers("/api/auth/**")
+//                        .permitAll()
+//                .anyRequest()
+//                    .authenticated();
 
         // Add our custom JWT security filter
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

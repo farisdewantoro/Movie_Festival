@@ -1,5 +1,6 @@
 package movie.festival.controller;
 
+import io.swagger.annotations.Api;
 import movie.festival.model.User;
 import movie.festival.payload.EmailAndUsernameResponse;
 import movie.festival.repository.UserRepository;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@Api
 @RequestMapping("/api/user")
 public class UserController {
     @Autowired
