@@ -10,6 +10,7 @@ import movie.festival.model.RoleName;
 import movie.festival.model.User;
 import movie.festival.repository.RoleRepository;
 import movie.festival.repository.UserRepository;
+import org.axonframework.config.ProcessingGroup;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -20,18 +21,16 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 @Component
+@ProcessingGroup("UserProjection")
 public class UserProjection {
+
     private final UserRepository userRepository;
-
     private final RoleRepository roleRepository;
-
     private final PasswordEncoder passwordEncoder;
 
     @EventHandler
-    public void on(UserCreatedEvent event) throws Exception {
+    public void on(UserCreatedEvent event){
         log.debug("Handling a UserCreatedEvent {}", event);
-
-
             // Creating user's account
         User user = new User(
                 event.getId(),
@@ -49,6 +48,7 @@ public class UserProjection {
         user.setRoles(Collections.singleton(userRole));
         userRepository.save(user);
     }
+
 
     @EventHandler
     public void on(UserChangedPasswordEvent event) throws Exception {
