@@ -39,6 +39,7 @@ public class UserCommandService {
             return new ResponseEntity(new ApiResponse(false, "Username/Email is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
+
         UUID id = UUID.randomUUID();
         CompletableFuture completableFuture = this.commandGateway.send(new CreateUserCommand(
                 id,
